@@ -81,7 +81,7 @@ cacheSolve <- function(x, ...) {
     # calculate inverse of matrix
       invofx <- solve(data,...)
   
-    # set the cached inverse of matrix
+    # set the inverse of matrix
     x$setinverse(invofx)
   
     # return inverse of marix
