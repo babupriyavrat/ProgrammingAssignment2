@@ -26,6 +26,9 @@
 
 makeCacheMatrix <- function(x = matrix()) {
   
+  #check if matrix is passed or something else to this function
+  if(is.matrix( x ))
+  {
   # in the beginning, initialize the stored inverse value to NULL
   invofx <- NULL
   
@@ -49,8 +52,12 @@ makeCacheMatrix <- function(x = matrix()) {
   list(set = set, get = get,
        setinverse = setinverse,
        getinverse = getinverse)
+  }
+ else
+{
+  message("This is not a matrix!")
+}  
 }
-
 
 ## Write a short comment describing this function
 
@@ -60,22 +67,24 @@ cacheSolve <- function(x, ...) {
   # get inverse
   invofx <- x$getinverse()
   
-  # if inverse exists, check if already cached
-  # if yes, return cached inverse
+  # if inverse of x exists, check if already cached
+  # if yes, return cached inverse of x
   if(!is.null(invofx)) {
     message("getting cached data")
     return(invofx)
   }
+  else
   
-  # if not, get matrix
-  data <- x$get()
+    { # if inverse is not cached, get matrix of x
+      data <- x$get()
   
-  # compute inverse of matrix
-  invofx <- solve(data,...)
+    # calculate inverse of matrix
+      invofx <- solve(data,...)
   
-  # cache inverse of matrix
-  x$setinverse(invofx)
+    # set the cached inverse of matrix
+    x$setinverse(invofx)
   
-  # return inverse of marix
-  invofx
+    # return inverse of marix
+    invofx
+    }
 }
